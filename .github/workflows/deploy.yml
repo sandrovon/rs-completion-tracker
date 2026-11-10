@@ -34,6 +34,8 @@ jobs:
           fi
       - name: Import cape achievements from RuneScape Wiki
         run: python3 scripts/fetch_cape_requirements.py
+      - name: Fetch official cape images from RuneScape Wiki
+        run: python3 scripts/fetch_cape_images.py
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
