@@ -32,6 +32,8 @@ jobs:
           if [ -f public/honeie-player.json ]; then
             node -e 'const fs=require("fs"); const p="public/honeie-player.json"; try {const d=JSON.parse(fs.readFileSync(p,"utf8")); if(!d.skills||!d.quests) throw Error("missing data"); console.log("Valid RuneScape data for "+d.name)}catch(e){console.log("RuneScape data unavailable: "+e.message); fs.rmSync(p,{force:true})}'
           fi
+      - name: Import cape achievements from RuneScape Wiki
+        run: python3 scripts/fetch_cape_requirements.py
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
