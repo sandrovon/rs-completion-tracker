@@ -3,6 +3,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
 permissions:
   contents: read
   pages: write
@@ -21,6 +23,15 @@ jobs:
           cache: npm
           cache-dependency-path: package.json
       - run: npm install
+      - name: Fetch Honeie RuneScape data server-side
+        run: |
+          mkdir -p public
+          curl --fail --location --retry 2 --max-time 25 --silent --show-error \
+            'https://secure.runescape.com/m=adventurers-log/api/v1/playerData/Honeie?includeSkills=true&includeQuests=true' \
+            -o public/honeie-player.json || rm -f public/honeie-player.json
+          if [ -f public/honeie-player.json ]; then
+            node -e 'const fs=require("fs"); const p="public/honeie-player.json"; try {const d=JSON.parse(fs.readFileSync(p,"utf8")); if(!d.skills||!d.quests) throw Error("missing data"); console.log("Valid RuneScape data for "+d.name)}catch(e){console.log("RuneScape data unavailable: "+e.message); fs.rmSync(p,{force:true})}'
+          fi
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
