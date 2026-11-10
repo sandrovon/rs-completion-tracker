@@ -1,7 +1,9 @@
 # RS Completion Tracker
 
-RuneScape 3 progress tracker with eight editable goals and a 5.8 billion XP wall (5,800,000 dots, 1,000 XP each).
+A RuneScape 3 completion tracker for eight cape goals: Max, Master Max, Quest, Master Quest, Completionist, Trimmed Completionist, Master Completionist and Master Trimmed Completionist.
 
-Live site: https://sandrovon.github.io/osrs-completion-tracker/
+Each cape has an editable checklist and Wiki link. The tracker also contains a 5.8 billion XP wall with 5.8 million pixels (1,000 XP per pixel). Progress saves in browser localStorage and can be exported to JSON.
 
-Progress is saved locally in the browser. The GitHub repository name and Pages URL still use the old slug until renamed in GitHub Settings.
+**Note:** The initial checklists are high-level milestones, not exhaustive or authoritative requirement lists.
+
+Live: https://sandrovon.github.io/rs-completion-tracker/
